@@ -8,7 +8,7 @@ using namespace std;
 int N, M, ans, cmp[501], dist[501][501];
 vector<int> graph[501];
 
-void Floyd() {	//a -> b로 가는 최단 경로 탐색
+void Floyd() {	  //a -> b로 가는 최단 경로 탐색
 	for (int k = 1; k <= N; k++) {
 		for (int i = 1; i <= N; i++) {
 			for (int j = 1; j <= N; j++) {
