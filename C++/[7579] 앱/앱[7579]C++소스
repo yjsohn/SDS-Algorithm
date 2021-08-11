@@ -1,0 +1,29 @@
+#include <iostream>
+using namespace std;
+
+int N, M, cost[101], mem[101], cost_sum, dp[101][10001], ans;
+//dp[n][c] n 번째 앱까지 판단했을 때, 비용 c를 들였을 때, 최대 메모리
+int main() {
+    ios_base :: sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+    cin >> N >> M;
+    for(int n = 1; n <= N; n++) cin >> mem[n];
+    for(int n = 1; n <= N; n++) {
+        cin >> cost[n];
+        cost_sum += cost[n];
+    }
+    
+    for(int n = 1; n <= N; n++) {
+        for(int c = 0; c <= cost_sum; c++) {
+            if(c >= cost[n]) { 
+                dp[n][c] = max(dp[n][c], dp[n - 1][c - cost[n]] + mem[n]);
+            }
+            dp[n][c] = max(dp[n][c], dp[n - 1][c]);
+        }
+    }
+    
+    for(ans = 0; ans <= cost_sum; ans++) { if(dp[N][ans] >= M) break; }
+    cout << ans;
+    return 0;
+}
